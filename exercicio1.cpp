@@ -8,8 +8,7 @@ struct Passagem
 {
     std::string nome;
     int idade;
-    char cpf;
-    char data;
+    string cpf;
     int dia;
     int mes;
     int ano;
@@ -26,7 +25,7 @@ void adiciona_zero()
 { // Função que preenche as posições da matriz com 0.
 
     /**Laço que preenche as posições da matriz "onibus_ida" com "0"**/
-    for (int linha = 0; linha <= onibus_ida.size(); linha++)
+    for (int linha = 0; linha < onibus_ida.size(); linha++)
     {
         for (int coluna = 0; coluna < onibus_ida[linha].size(); coluna++)
         {
@@ -35,7 +34,7 @@ void adiciona_zero()
     }
 
     // Laço que preenche as posições da matriz "onibus_volta" com "0"
-    for (int linha = 0; linha <= onibus_volta.size(); linha++)
+    for (int linha = 0; linha < onibus_volta.size(); linha++)
     {
         for (int coluna = 0; coluna < onibus_volta[linha].size(); coluna++)
         {
@@ -57,28 +56,26 @@ void total_arrecadado_viagem()
 
         for (int coluna = 0; coluna < onibus_ida[horario].size(); coluna++)
         {
-            if (onibus_ida[opcao][coluna].verifica != 0)
+            if (onibus_ida[horario][coluna].verifica != 0)
             {
                 total_viagem += 80;
             }
-
-            std::cout << total_viagem;
         }
+        std::cout << "Total arrecadado: " << total_viagem << std::endl;
     }
     else if (opcao == 2)
     {
         cout << "De qual horário você deseja saber o total arrecadado? escolha de 0 à 4: ";
         cin >> horario;
 
-        for (int coluna = 0; coluna < onibus_ida[horario].size(); coluna++)
+        for (int coluna = 0; coluna < onibus_volta[horario].size(); coluna++)
         {
-            if (onibus_ida[opcao][coluna].verifica != 0)
+            if (onibus_volta[horario][coluna].verifica != 0)
             {
                 total_viagem += 80;
-            }
-
-            std::cout << total_viagem;
+            } 
         }
+        std::cout << "Total arrecadado: " << total_viagem << std::endl;
     }
     else
     {
@@ -88,13 +85,13 @@ void total_arrecadado_viagem()
 
 void total_arrecadado_mes()
 { // Função 2.
-    int mes, total_mes;
+    int mes, total_mes = 0;
     std::cout << "Insira o mês que deseja verificar: ";
     std::cin >> mes;
 
     /**Laço que verifica se o mês contido em determinada posição condiz com o digitado pelo usuário,
      * caso seja igual, soma o valor da passagem a uma variavel.**/
-    for (int linha = 0; linha <= onibus_ida.size(); linha++)
+    for (int linha = 0; linha < onibus_ida.size(); linha++)
     {
         for (int coluna = 0; coluna < onibus_ida[linha].size(); coluna++)
         {
@@ -107,11 +104,11 @@ void total_arrecadado_mes()
 
     /**Laço que verifica se o mês contido em determinada posição condiz com o digitado pelo usuário,
      * caso seja igual, soma o valor da passagem a uma variavel.**/
-    for (int linha = 0; linha <= onibus_volta.size(); linha++)
+    for (int linha = 0; linha < onibus_volta.size(); linha++)
     {
         for (int coluna = 0; coluna < onibus_volta[linha].size(); coluna++)
         {
-            if (onibus_ida[linha][coluna].mes == mes)
+            if (onibus_volta[linha][coluna].mes == mes)
             {
                 total_mes += 80;
             }
@@ -159,14 +156,13 @@ void nome_passageiro()
 void horario_mais_rentavel()
 { // Função 4.
     int total_viagem = 0;
-    int quantidade_passageiros = 0;
-    int auxiliar = 0;
-    int maior;
+    int maior_receita_ida = 0;
+    int horario_rentavel_ida = -1;
 
-    /**Laço que preenche as posições da matriz "onibus_ida" com "0"**/
-    for (int linha = 0; linha <= onibus_ida.size(); linha++)
+    for (int linha = 0; linha < onibus_ida.size(); linha++)
     {
-        auxiliar = quantidade_passageiros;
+
+        total_viagem = 0;
 
         for (int coluna = 0; coluna < onibus_ida[linha].size(); coluna++)
         {
@@ -174,24 +170,80 @@ void horario_mais_rentavel()
             if (onibus_ida[linha][coluna].verifica != 0)
             {
                 total_viagem += 80;
-                quantidade_passageiros++;
             }
         }
 
-        if (quantidade_passageiros > auxiliar)
+        if (total_viagem > maior_receita_ida)
         {
-            maior = linha;
+            maior_receita_ida = total_viagem;
+            horario_rentavel_ida = linha;
         }
     }
 
-    // Laço que preenche as posições da matriz "onibus_volta" com "0"
-    for (int linha = 0; linha <= onibus_volta.size(); linha++)
+    int maior_receita_volta = 0;
+    int horario_rentavel_volta = -1;
+
+    for (int linha = 0; linha < onibus_volta.size(); linha++)
+    {
+
+        total_viagem = 0;
+
+        for (int coluna = 0; coluna < onibus_volta[linha].size(); coluna++)
+        {
+
+            if (onibus_volta[linha][coluna].verifica != 0)
+            {
+                total_viagem += 80;
+            }
+        }
+
+        if (total_viagem > maior_receita_volta)
+        {
+            maior_receita_volta = total_viagem;
+            horario_rentavel_volta = linha;
+        }
+    }
+    if (maior_receita_ida > maior_receita_volta)
+    {
+        std::cout << horario_rentavel_ida;
+    }
+    else
+    {
+        std::cout << horario_rentavel_volta;
+    }
+}
+
+void media_idade()
+{ // Função 5.
+    int soma_idade = 0, contador = 0;
+    float media_idade;
+
+    for (int linha = 0; linha < onibus_ida.size(); linha++)
+    {
+        for (int coluna = 0; coluna < onibus_ida[linha].size(); coluna++)
+        {
+            if (onibus_ida[linha][coluna].verifica != 0)
+            {
+                soma_idade += onibus_ida[linha][coluna].idade;
+                contador++;
+            }
+        }
+    }
+
+    for (int linha = 0; linha < onibus_volta.size(); linha++)
     {
         for (int coluna = 0; coluna < onibus_volta[linha].size(); coluna++)
         {
-            onibus_volta[linha][coluna].verifica = 0;
+            if (onibus_volta[linha][coluna].verifica != 0)
+            {
+                soma_idade += onibus_volta[linha][coluna].idade;
+                contador++;
+            }
         }
     }
+
+    media_idade = soma_idade / contador;
+    std::cout << "A média de idade dos passageiros é de: " << media_idade << ".";
 }
 
 void cadastro()
@@ -223,6 +275,8 @@ void cadastro()
             cin >> onibus_ida[horario][poltrona].cpf;
             cout << "Insira a idade do comprador: ";
             cin >> onibus_ida[horario][poltrona].idade;
+
+            onibus_ida[horario][poltrona].verifica = 1;
         }
         else
         {
@@ -253,6 +307,8 @@ void cadastro()
             cin >> onibus_volta[horario][poltrona].cpf;
             cout << "Insira a idade do comprador: ";
             cin >> onibus_volta[horario][poltrona].idade;
+
+            onibus_volta[horario][poltrona].verifica = 1;
         }
         else
         {
@@ -269,8 +325,9 @@ int main()
     adiciona_zero();
 
     int escolha;
+    bool sair = false;
 
-    while (escolha != 0)
+    while (sair == false)
     {
         std::cout << "Olá! Seja bem vindo ao sistema de passagem da BestBus!" << endl;
         std::cout << "======================================================" << endl;
@@ -303,12 +360,17 @@ int main()
         case 4:
             horario_mais_rentavel();
             break;
-    
+
         case 5:
+            media_idade();
             break;
 
         case 6:
             cadastro();
+            break;
+
+        case 0:
+            sair = true;
             break;
 
         default:
