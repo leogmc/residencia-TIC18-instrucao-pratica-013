@@ -42,7 +42,7 @@ possibilitar obter as seguintes informações:
     - Dentro da função, rode if-else que se o valor contido na matriz [HORÁRIO][PASSAGEM] for DIFERENTE DE 0, que retorne ao usuário a informação do NOME contidas dentro daquela posição da matriz. Caso o contrário, exiba um erro "O assento está vazio".
 
 4. Qual o horário de viagem mais rentável.
-    - Crie uma função que dentro dela rode um FOR que passe por cada matriz ÔNIBUS_IDA[5][40] e ÔNIBUS_VOLTA[5][40] e que a cada laço, rode a função(1) e logo em seguida verifique se o valor de retorno armazenado na função(1) é maior que o valor contido na matriz anterior. Caso seja, uma variável "horario_mais_rentável" recebe a posição [HORÁRIO][40] da matriz e depois retorna ao usuário a variável "horario_mais_rentável" para o usuário.
+    - Crie uma função que dentro dela rode um FOR que passe por cada matriz ÔNIBUS_IDA[5][40] e ÔNIBUS_VOLTA[5][40] e que a cada laço, rode a função(1) e logo em seguida verifique se o valor de retorno armazenado na função(1) é maior que o valor contido na matriz anterior. Caso seja, uma variável "horario_mais_rentável" recebe a posição [HORÁRIO][40] da matriz e depois retorna a variável "horario_mais_rentável" para o usuário.
 
 5. Qual a média de idade dos passageiros.
     - Crie uma função que dentro dela rode um FOR que passe por cada matriz ÔNIBUS_IDA[5][40] e ÔNIBUS_VOLTA[5][40] e que a cada laço verifique se os valores contidos nas posições são DIFERENTES de 0, caso seja, acrescente a uma variável "soma_idades" o valor .idade contido na posição atual, além disso, acrescenta também +1 a uma variável "contador". No final do laço, acrescente a uma variável "media_idade": media_idade = soma_idades / contador. Por fim, retorne ao usuário a variável "media_idade".
