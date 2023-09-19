@@ -19,9 +19,9 @@ possibilitar obter as seguintes informações:
 
 //Resolução:
 
-*Criar 2 MATRIZES de struct: ÔNIBUS_IDA[5][40](SP-RJ) e ÔNIBUS_VOLTA[5][40](RJ-SP). //Cada posição das MATRIZES são equivalentes a 1 HORÁRIO[5]  & 1 PASSAGEM[40], respectivamente.
+/**Criar 2 MATRIZES de struct: ÔNIBUS_IDA[5][40](SP-RJ) e ÔNIBUS_VOLTA[5][40](RJ-SP). //Cada posição das MATRIZES são equivalentes a 1 HORÁRIO[5]  & 1 PASSAGEM[40], respectivamente.**/
 
-*Cada posição de PASSAGEM[40] deve-se iniciar com o valor 0, para isso utilize um for de vai de '0' até o limite de PASSAGEM, nesse caso 40. Após isso, ele pode receber:
+*Cada posição de PASSAGEM[40] deve-se iniciar com o valor 0, para isso utilize um for que vai de '0' até o limite de PASSAGEM, nesse caso 40. Após isso, ele pode receber:
     -Número do assento (Nesse caso o número será o mesmo da posição do vetor);
     -Data;
     -CPF;
